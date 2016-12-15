@@ -92,6 +92,12 @@ function ec_mapeditor_install() {
  * as default view mode.
  */
 function _ec_mapeditor_create_map_layer_field() {
+
+  // Clear field definition cache so that the entityreference field type is
+  // known to drupal during the enable hook. See
+  // https://www.drupal.org/node/1783886 and https://www.drupal.org/node/906668
+  _field_info_collate_types(true);
+
   if (field_info_field('map_layers')) {
     watchdog('ec_mapeditor_layer', 'Field Map Countries not created because it exists already', array(), WATCHDOG_NOTICE, NULL);
   }
